@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cascata do Chuvisqueiro — 76m de Natureza Pura | Riozinho, RS</title>
+  <meta name="description" content="Explore os 76 metros de queda livre da Cascata do Chuvisqueiro e a Cascata Três Quedas em Riozinho, RS. Veja o mapa interativo, planeje sua visita e garanta seu voucher offline.">
+  <meta name="theme-color" content="#0B2118">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230B2118'/%3E%3Cpath d='M32 12c-8 12-16 20-16 29a16 16 0 0 0 32 0c0-9-8-17-16-29z' fill='%231E8E63'/%3E%3Cpath d='M22 40c3 5 9 8 15 6' stroke='%23F4F5F0' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navbar Fixa com Glassmorphism -->
+  <header class="site-nav nav-dark" id="site-nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-brand" aria-label="Cascata do Chuvisqueiro - Início">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" fill="none">
+            <rect x="1" y="1" width="34" height="34" rx="11" stroke="currentColor" stroke-opacity="0.24" stroke-width="1.5"/>
+            <path d="M18 8c-4.5 6.8-8.5 11.4-8.5 16.2a8.5 8.5 0 0 0 17 0C26.5 19.4 22.5 14.8 18 8Z" fill="#1E8E63"/>
+            <path d="M12.5 23.5c2.2 3 6.2 4.2 9.8 2.6" stroke="#F4F5F0" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <strong>CHUVISQUEIRO</strong>
+          <small>Riozinho · RS</small>
+        </span>
+      </a>
+
+      <nav class="nav-links" aria-label="Navegação principal">
+        <a href="#hero" data-scroll-act="3">A Experiência</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#guia">Guia &amp; Rota</a>
+        <a href="#mapa">Mapa</a>
+        <a href="#bilheteria">Bilheteria</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button type="button" class="nav-voucher-btn hidden" id="nav-voucher-btn" aria-label="Abrir meu voucher salvo offline">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          Meu Voucher
+        </button>
+        <a href="#bilheteria" class="btn btn-amber nav-cta magnetic-btn">
+          <span>Garantir Ingresso</span>
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </a>
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Abrir menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-drawer" id="mobile-drawer" hidden>
+      <a href="#hero" data-scroll-act="1">Início (76m)</a>
+      <a href="#hero" data-scroll-act="3">A Experiência</a>
+      <a href="#galeria">Galeria Real</a>
+      <a href="#guia">Guia &amp; Rota</a>
+      <a href="#mapa">Mapa do Complexo</a>
+      <a href="#bilheteria">Bilheteria Digital</a>
+      <button type="button" class="drawer-voucher hidden" id="drawer-voucher-btn">Ver Voucher Offline</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- SEÇÃO 1: HERO 400vh COM VÍDEO MULTI-CENA & 3 ATOS -->
+    <section class="hero-scrolly" id="hero" aria-label="Experiência imersiva Cascata do Chuvisqueiro">
+      <div class="hero-sticky" id="hero-sticky">
+        <div class="hero-stage-frame" id="hero-stage-frame">
+          <!-- Fallback Canvas com ondas topográficas e gradiente esmeralda -->
+          <canvas id="hero-fallback-canvas" class="hero-media hero-canvas" aria-hidden="true"></canvas>
+
+          <!-- Vídeo multi-cena sincronizado ao scroll -->
+          <video
+            id="scroll-video"
+            class="hero-media hero-video"
+            src="/assets/hero-bg.mp4"
+            poster="/assets/hero-poster.jpg"
+            muted
+            playsinline
+            preload="auto"
+          ></video>
+
+          <!-- Camada topográfica sutil que evolui no scroll -->
+          <canvas id="hero-topo-overlay" class="hero-topo-overlay" aria-hidden="true"></canvas>
+
+          <!-- Overlay escuro editorial -->
+          <div class="hero-overlay" aria-hidden="true"></div>
+        </div>
+
+        <!-- Indicador de Progresso dos 3 Atos -->
+        <aside class="hero-progress" aria-label="Progresso dos capítulos da experiência">
+          <button type="button" class="progress-step is-active" data-goto-act="1" aria-label="Ir para Ato 1: Visão Geral">
+            <span>01</span>
+            <small>Queda</small>
+          </button>
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-fill" id="hero-progress-fill"></div>
+          </div>
+          <button type="button" class="progress-step" data-goto-act="2" aria-label="Ir para Ato 2: Dimensões">
+            <span>02</span>
+            <small>Escala</small>
+          </button>
+          <button type="button" class="progress-step" data-goto-act="3" aria-label="Ir para Ato 3: Experiências">
+            <span>03</span>
+            <small>Complexo</small>
+          </button>
+        </aside>
+
+        <!-- ATO 1 (0% a 33%) -->
+        <div class="hero-act act-1 is-active" id="act-1">
+          <div class="container act1-layout">
+            <span class="eyebrow">VALE DO PARANHANA · RIOZINHO, RS</span>
+            <h1 class="hero-title">76 metros de natureza pura no Vale do Paranhana</h1>
+            <p class="hero-subtitle">
+              Um anfiteatro natural de basalto alaranjado cercado pela Mata Atlântica, com acesso plano e fácil a apenas 5 minutos do estacionamento.
+            </p>
+            <div class="hero-ctas">
+              <a href="#bilheteria" class="btn btn-amber btn-lg btn-pulse magnetic-btn">
+                <span>Garantir Ingresso</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </a>
+              <button type="button" class="btn btn-glass btn-lg magnetic-btn" data-goto-act="2">
+                <span>Ver a Experiência</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="scroll-cue" aria-hidden="true">
+            <span class="scroll-line"></span>
+            <span>Role para sobrevoar o cânion</span>
+          </div>
+        </div>
+
+        <!-- ATO 2 (34% a 66%) -->
+        <div class="hero-act act-2" id="act-2" aria-hidden="true">
+          <div class="container act2-layout">
+            <div class="act2-copy">
+              <span class="eyebrow eyebrow-emerald">02 · ESCALA DO CÂNION</span>
+              <h2>A força de uma das maiores quedas do Rio Grande do Sul</h2>
+              <p>
+                A água despenca em véu contínuo sobre o paredão alaranjado formando um poço profundo de tons esmeralda. Ao redor das 12h, os raios solares atingem o fundo do cânion e acendem a mata ao redor.
+              </p>
+              <div class="act2-meta-pill">
+                <span>Melhor iluminação solar: ~11h30 às 13h30</span>
+              </div>
+            </div>
+
+            <div class="act2-panel" id="act2-panel">
+              <div class="stat-tile">
+                <div class="stat-value">
+                  <span class="counter" data-target="76" data-suffix="m">76m</span>
+                </div>
+                <div class="stat-label">de queda livre</div>
+                <div class="stat-note">Paredão monumental em basalto alaranjado</div>
+              </div>
+
+              <div class="stat-tile">
+                <div class="stat-value">
+                  <span class="counter" data-target="120" data-suffix=" km">120 km</span>
+                </div>
+                <div class="stat-label">de Porto Alegre</div>
+                <div class="stat-note">Bate e volta fácil pelo Vale do Paranhana</div>
+              </div>
+
+              <div class="stat-tile">
+                <div class="stat-value">
+                  <span class="counter" data-target="2" data-suffix=" Cascatas">2 Cascatas</span>
+                </div>
+                <div class="stat-label">no mesmo complexo</div>
+                <div class="stat-note">Chuvisqueiro + Três Quedas via trilha de 800m</div>
+              </div>
+
+              <div class="stat-tile">
+                <div class="stat-value">
+                  <span class="counter" data-text="07h – 18h">07h – 18h</span>
+                </div>
+                <div class="stat-label">funcionamento diário</div>
+                <div class="stat-note">Aberto todos os dias, inclusive fins de semana</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ATO 3 (67% a 100%) -->
+        <div class="hero-act act-3" id="act-3" aria-hidden="true">
+          <div class="container act3-layout">
+            <div class="act3-header">
+              <div>
+                <span class="eyebrow eyebrow-emerald">03 · EXPERIÊNCIAS DO COMPLEXO</span>
+                <h2>Quatro cenários em um único ingresso</h2>
+              </div>
+              <a href="#bilheteria" class="btn btn-amber magnetic-btn">
+                <span>Reservar Dia de Visita</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+
+            <div class="exp-grid">
+              <article class="exp-card" data-tilt-card>
+                <div class="exp-thumb">
+                  <img src="/assets/chuvisqueiro-real-poco.jpg" alt="Piscina natural de água esmeralda e prainha na base da Cascata do Chuvisqueiro">
+                  <span class="exp-badge">Base · Acesso Fácil</span>
+                </div>
+                <div class="exp-body">
+                  <h3>Piscina Natural &amp; Prainha na Base</h3>
+                  <p>Águas cristalinas com prainha rasa nas margens para refrescar os pés e poço profundo no centro da queda.</p>
+                  <button type="button" class="exp-toggle-btn" aria-expanded="false">Ver detalhes +</button>
+                  <div class="exp-detail-drawer" hidden>
+                    <ul>
+                      <li><strong>Caminhada:</strong> ~150m planos (5 min)</li>
+                      <li><strong>Indicação:</strong> Famílias e crianças</li>
+                      <li><strong>Melhor luz:</strong> 11h30 às 13h30</li>
+                    </ul>
+                    <a href="#mapa" class="exp-detail-link" data-focus-waypoint="0">Ver ponto no mapa →</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="exp-card" data-tilt-card>
+                <div class="exp-thumb">
+                  <img src="/assets/mirante-topo.jpg" alt="Mirante de pedra no topo do paredão da cascata com vista para o vale">
+                  <span class="exp-badge">Topo · Aventura</span>
+                </div>
+                <div class="exp-body">
+                  <h3>Mirante do Topo (Borda Infinita)</h3>
+                  <p>Vista panorâmica dramática do alto do paredão olhando o vale da Mata Atlântica em toda a sua extensão.</p>
+                  <button type="button" class="exp-toggle-btn" aria-expanded="false">Ver detalhes +</button>
+                  <div class="exp-detail-drawer" hidden>
+                    <ul>
+                      <li><strong>Nível:</strong> Moderado · pedras expostas</li>
+                      <li><strong>Vista:</strong> Vale do Paranhana</li>
+                      <li><strong>Calçado:</strong> Tênis com sola aderente</li>
+                    </ul>
+                    <a href="#mapa" class="exp-detail-link" data-focus-waypoint="2">Ver ponto no mapa →</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="exp-card" data-tilt-card>
+                <div class="exp-thumb">
+                  <img src="/assets/tres-quedas-real.jpg" alt="Cascata Três Quedas cercada de vegetação nativa">
+                  <span class="exp-badge">Trilha · 800m</span>
+                </div>
+                <div class="exp-body">
+                  <h3>Trilha Cascata Três Quedas</h3>
+                  <p>Caminhada moderada de ~20 minutos margeando o arroio por dentro da mata fechada até três quedas em degraus.</p>
+                  <button type="button" class="exp-toggle-btn" aria-expanded="false">Ver detalhes +</button>
+                  <div class="exp-detail-drawer" hidden>
+                    <ul>
+                      <li><strong>Percurso:</strong> 800m (~20 min)</li>
+                      <li><strong>Ingresso:</strong> Incluso no mesmo ticket</li>
+                      <li><strong>Sombra:</strong> 100% em Mata Atlântica</li>
+                    </ul>
+                    <a href="#mapa" class="exp-detail-link" data-focus-waypoint="3">Ver ponto no mapa →</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="exp-card" data-tilt-card>
+                <div class="exp-thumb">
+                  <img src="/assets/camping-mata.jpg" alt="Área de camping arborizada com churrasqueiras à sombra das árvores">
+                  <span class="exp-badge">Lazer · Pernoite</span>
+                </div>
+                <div class="exp-body">
+                  <h3>Área de Camping &amp; Churrasqueiras</h3>
+                  <p>Gramado sombreado junto ao arroio com churrasqueiras, pias, banheiros equipados e pernoite opcional.</p>
+                  <button type="button" class="exp-toggle-btn" aria-expanded="false">Ver detalhes +</button>
+                  <div class="exp-detail-drawer" hidden>
+                    <ul>
+                      <li><strong>Pernoite:</strong> R$ 65,00/pessoa/noite</li>
+                      <li><strong>Estrutura:</strong> Chuveiros, pias e bar</li>
+                      <li><strong>Estacionamento:</strong> R$ 20,00/veículo</li>
+                    </ul>
+                    <a href="#bilheteria" class="exp-detail-link">Incluir pernoite →</a>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAIMAL CINÉTICO DE TRANSIÇÃO -->
+    <div class="kinetic-marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>76M DE QUEDA LIVRE</span>
+        <span class="dot">◆</span>
+        <span>BASALTO ALARANJADO</span>
+        <span class="dot">◆</span>
+        <span>MATA ATLÂNTICA PRESERVADA</span>
+        <span class="dot">◆</span>
+        <span>CASCATA TRÊS QUEDAS INCLUSA</span>
+        <span class="dot">◆</span>
+        <span>VOUCHER OFFLINE GARANTIDO</span>
+        <span class="dot">◆</span>
+      </div>
+      <div class="marquee-track">
+        <span>76M DE QUEDA LIVRE</span>
+        <span class="dot">◆</span>
+        <span>BASALTO ALARANJADO</span>
+        <span class="dot">◆</span>
+        <span>MATA ATLÂNTICA PRESERVADA</span>
+        <span class="dot">◆</span>
+        <span>CASCATA TRÊS QUEDAS INCLUSA</span>
+        <span class="dot">◆</span>
+        <span>VOUCHER OFFLINE GARANTIDO</span>
+        <span class="dot">◆</span>
+      </div>
+    </div>
+
+    <!-- SEÇÃO 2: GALERIA REAL DO CÂNION -->
+    <section class="section-gallery" id="galeria">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow eyebrow-dark">REGISTROS REAIS DO CÂNION</span>
+            <h2 class="reveal-words">O paredão vivo em cada estação do ano</h2>
+          </div>
+          <p class="section-lead">
+            Fotografias reais registradas no complexo da Cascata do Chuvisqueiro e na vizinha Cascata Três Quedas. Clique para ampliar.
+          </p>
+        </div>
+
+        <div class="gallery-mosaic">
+          <figure class="gallery-item gallery-item-wide">
+            <button type="button" class="gallery-trigger" data-lightbox-src="/assets/chuvisqueiro-real-wide.jpg" data-lightbox-caption="Anfiteatro completo da Cascata do Chuvisqueiro (76m) em Riozinho, RS — Foto: Leandro Egidio Machado Toledo (CC BY-SA 4.0)">
+              <img src="/assets/chuvisqueiro-real-wide.jpg" alt="Vista aberta da Cascata do Chuvisqueiro com paredão rochoso e piscina natural">
+              <figcaption>
+                <span>Anfiteatro de 76 metros</span>
+                <small>Sol a pino ao meio-dia ilumina o poço verde-esmeralda</small>
+              </figcaption>
+            </button>
+          </figure>
+
+          <figure class="gallery-item gallery-item-tall">
+            <button type="button" class="gallery-trigger" data-lightbox-src="/assets/chuvisqueiro-real-paredao.jpg" data-lightbox-caption="Paredão alaranjado de basalto e névoa contínua na base da Cascata do Chuvisqueiro — Foto: Evanesa Schilling (CC BY-SA 4.0)">
+              <img src="/assets/chuvisqueiro-real-paredao.jpg" alt="Detalhe vertical do paredão alaranjado da Cascata do Chuvisqueiro">
+              <figcaption>
+                <span>Paredão Alaranjado</span>
+                <small>Basalto esculpido pela água</small>
+              </figcaption>
+            </button>
+          </figure>
+
+          <figure class="gallery-item">
+            <button type="button" class="gallery-trigger" data-lightbox-src="/assets/tres-quedas-real.jpg" data-lightbox-caption="Cascata Três Quedas, conectada por trilha de 800m dentro da mesma propriedade — Foto: Evanesa Schilling (CC BY-SA 4.0)">
+              <img src="/assets/tres-quedas-real.jpg" alt="Cascata Três Quedas em meio à Mata Atlântica em Riozinho">
+              <figcaption>
+                <span>Cascata Três Quedas</span>
+                <small>Inclusa no mesmo ingresso · trilha de 800m</small>
+              </figcaption>
+            </button>
+          </figure>
+
+          <figure class="gallery-item">
+            <button type="button" class="gallery-trigger" data-lightbox-src="/assets/chuvisqueiro-real-poco.jpg" data-lightbox-caption="Poço natural e faixa de pedras na base da Cascata do Chuvisqueiro — Foto: Cristina Garcia1 (CC BY-SA 4.0)">
+              <img src="/assets/chuvisqueiro-real-poco.jpg" alt="Banho na piscina natural da base da Cascata do Chuvisqueiro">
+              <figcaption>
+                <span>Poço &amp; Brisa da Queda</span>
+                <small>A apenas 5 min de caminhada plana do carro</small>
+              </figcaption>
+            </button>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 3: BENTO GRID INTERATIVO & GUIA DO VISITANTE -->
+    <section class="section-bento" id="guia">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow eyebrow-dark">GUIA PRÁTICO DO VISITANTE</span>
+            <h2 class="reveal-words">Planeje sua visita sem imprevistos</h2>
+          </div>
+          <p class="section-lead">
+            Tudo o que você precisa saber antes de pegar a estrada para o interior de Riozinho: acesso, infraestrutura, rota correta no GPS e cuidados essenciais.
+          </p>
+        </div>
+
+        <div class="bento-grid">
+          <!-- Card 1: Acesso Descomplicado (7 cols) -->
+          <article class="bento-card bento-span-7 bento-light" data-tilt-card>
+            <div class="bento-inner">
+              <div class="bento-top">
+                <span class="bento-tag">01 · ACESSO DESCOMPLICADO</span>
+                <span class="bento-badge-soft">Ideal para famílias &amp; crianças</span>
+              </div>
+              <h3>Da vaga do estacionamento à brisa da queda em 5 minutos</h3>
+              <p>
+                Você não precisa ser trilheiro experiente para viver a imensidão dos 76 metros. Do estacionamento até a base da Cascata do Chuvisqueiro, a caminhada é praticamente plana por cerca de <strong>150 metros</strong> (aproximadamente 300m ida e volta).
+              </p>
+              <div class="bento-metrics">
+                <div class="metric-chip">
+                  <strong>~150m</strong>
+                  <span>Trilha plana até a base</span>
+                </div>
+                <div class="metric-chip">
+                  <strong>800m</strong>
+                  <span>Trilha moderada até Três Quedas</span>
+                </div>
+                <div class="metric-chip">
+                  <strong>Topo</strong>
+                  <span>Acesso superior para aventureiros</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2: Estrutura Completa (5 cols) -->
+          <article class="bento-card bento-span-5 bento-forest" data-tilt-card>
+            <div class="bento-inner">
+              <div class="bento-top">
+                <span class="bento-tag">02 · ESTRUTURA COMPLETA</span>
+              </div>
+              <h3>Conforto no meio da Mata Atlântica</h3>
+              <p>
+                Complexo familiar preparado para passar o dia inteiro ou acampar sob as árvores nativas.
+              </p>
+              <ul class="structure-list">
+                <li>Área de camping arborizada junto ao arroio</li>
+                <li>Churrasqueiras e pias de uso compartilhado</li>
+                <li>Banheiros limpos com chuveiros</li>
+                <li>Estacionamento amplo e próximo às trilhas</li>
+                <li>Lancheria e restaurante nos fins de semana</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Card 3: Como Chegar & Dicas (6 cols) -->
+          <article class="bento-card bento-span-6 bento-light" data-tilt-card>
+            <div class="bento-inner">
+              <div class="bento-top">
+                <span class="bento-tag">03 · COMO CHEGAR</span>
+                <span class="bento-badge-soft">~16–18 km do centro de Riozinho</span>
+              </div>
+              <h3>Rota cênica pela RS-239 + estrada de chão</h3>
+              <p>
+                Saindo de Porto Alegre (~120 km) ou da Serra Gaúcha, siga pela <strong>RS-239</strong> até Riozinho e entre na estrada vicinal sinalizada em direção à localidade de Chuvisqueiro (cerca de <strong>8 km de estrada de chão em bom estado</strong> para carros de passeio).
+              </p>
+              <div class="gps-callout">
+                <strong>Dica de ouro para o GPS:</strong>
+                <span>Pesquise por <em>“Camping Cascata do Chuvisqueiro”</em> para chegar direto ao estacionamento da base. Buscar apenas o nome da cascata pode levar ao mirante superior.</span>
+              </div>
+              <div class="bento-actions">
+                <a href="https://share.google/BQE4f8G66X46oMTqJ" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark magnetic-btn">
+                  <span>Abrir Rota no Google Maps ↗</span>
+                </a>
+                <span class="coords-tag">-29.5821, -50.4264</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4: Alerta Útil de Segurança & Offline (6 cols) -->
+          <article class="bento-card bento-span-6 bento-alert" data-tilt-card>
+            <div class="bento-inner">
+              <div class="bento-top">
+                <span class="bento-tag tag-amber">04 · SEGURANÇA &amp; SINAL LIMITADO</span>
+              </div>
+              <h3>Atenção às pedras, ao poço e à conexão na mata</h3>
+              <p>
+                A beleza selvagem exige respeito: o complexo preserva a natureza original e conta com alertas importantes para todos os visitantes.
+              </p>
+              <div class="alert-points">
+                <div class="alert-row">
+                  <span class="alert-dot"></span>
+                  <div>
+                    <strong>Pedras escorregadias &amp; sem guarda-vidas:</strong> Use calçados com boa aderência, redobre o cuidado próximo às bordas molhadas e respeite a profundidade central do poço.
+                  </div>
+                </div>
+                <div class="alert-row">
+                  <span class="alert-dot"></span>
+                  <div>
+                    <strong>Sinal de celular instável na portaria:</strong> Na região do cânion a internet oscila. Garanta seu ingresso antes e <strong>salve o voucher offline</strong> no seu aparelho.
+                  </div>
+                </div>
+              </div>
+              <div class="bento-actions">
+                <a href="#bilheteria" class="btn btn-amber magnetic-btn">
+                  <span>Gerar Voucher Offline Agora</span>
+                  <span class="btn-arrow" aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 3.5: MAPA INTERATIVO DO COMPLEXO & TRILHAS -->
+    <section class="section-map" id="mapa">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow eyebrow-dark">05 · MAPA INTERATIVO &amp; TRILHAS</span>
+            <h2 class="reveal-words">Localização exata e pontos do complexo</h2>
+          </div>
+          <p class="section-lead">
+            Navegue pelos pontos principais do cânion, alterne entre visão por satélite e mapa topográfico ou abra a rota direta no Google Maps.
+          </p>
+        </div>
+
+        <div class="map-layout">
+          <aside class="map-sidebar" aria-label="Pontos de interesse no mapa">
+            <div class="map-waypoints" id="map-waypoints">
+              <button type="button" class="waypoint-card is-active" data-waypoint="0">
+                <span class="wp-badge wp-emerald">Base · 76m</span>
+                <strong>Cascata do Chuvisqueiro (Poço)</strong>
+                <small>Queda livre de 76m, prainha rasa e poço verde-esmeralda.</small>
+              </button>
+
+              <button type="button" class="waypoint-card" data-waypoint="1">
+                <span class="wp-badge wp-emerald">Chegada · GPS</span>
+                <strong>Portaria, Estacionamento &amp; Camping</strong>
+                <small>Destino correto no GPS ("Camping Cascata do Chuvisqueiro").</small>
+              </button>
+
+              <button type="button" class="waypoint-card" data-waypoint="2">
+                <span class="wp-badge wp-amber">Mirante</span>
+                <strong>Mirante Superior (Borda do Paredão)</strong>
+                <small>Vista panorâmica de cima da queda de basalto alaranjado.</small>
+              </button>
+
+              <button type="button" class="waypoint-card" data-waypoint="3">
+                <span class="wp-badge wp-amber">Trilha · 800m</span>
+                <strong>Cascata Três Quedas</strong>
+                <small>20 min de trilha na mata · inclusa no mesmo ingresso.</small>
+              </button>
+
+              <button type="button" class="waypoint-card" data-waypoint="4">
+                <span class="wp-badge wp-slate">Acesso</span>
+                <strong>Estrada Vicinal (RS-239 → Chuvisqueiro)</strong>
+                <small>~8 km de estrada de chão em bom estado a partir da saída.</small>
+              </button>
+            </div>
+
+            <div class="map-sidebar-actions">
+              <button type="button" class="btn btn-outline-dark btn-block" id="map-overview-btn">
+                Ver Todo o Complexo
+              </button>
+              <a
+                href="https://share.google/BQE4f8G66X46oMTqJ"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-amber btn-block magnetic-btn"
+              >
+                <span>Traçar Rota no Google Maps ↗</span>
+              </a>
+            </div>
+          </aside>
+
+          <div class="map-stage">
+            <div class="map-toolbar" role="group" aria-label="Camada de visualização do mapa">
+              <button type="button" class="map-layer-btn is-active" data-map-layer="satellite">Satélite</button>
+              <button type="button" class="map-layer-btn" data-map-layer="clean">Mapa Limpo</button>
+              <button type="button" class="map-layer-btn" data-map-layer="gmaps">Google Maps</button>
+            </div>
+
+            <div id="chuvisqueiro-map" class="leaflet-map-canvas" aria-label="Mapa interativo da Cascata do Chuvisqueiro"></div>
+            <div id="gmaps-embed-wrap" class="gmaps-embed-wrap hidden"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 3.8: PORTAL DE TRANSIÇÃO COM VÍDEO DINÂMICO -->
+    <section class="section-video-transition" id="transicao-video" aria-label="Transição cinematográfica para a bilheteria">
+      <div class="video-portal-sticky">
+        <div class="video-portal-frame" id="video-portal-frame">
+          <video
+            id="transition-video"
+            class="transition-video-el"
+            src="/assets/transition-canyon.mp4"
+            poster="/assets/chuvisqueiro-real-poco.jpg"
+            muted
+            playsinline
+            preload="auto"
+          ></video>
+          <div class="video-portal-overlay" aria-hidden="true"></div>
+          <div class="video-portal-content">
+            <span class="eyebrow eyebrow-emerald">IMERSÃO NO VALE DO PARANHANA</span>
+            <h2 class="reveal-words">Da tela para a névoa gelada dos 76 metros</h2>
+            <p>A 120 km de Porto Alegre, com entrada garantida direto no celular mesmo sem sinal de internet.</p>
+            <a href="#bilheteria" class="btn btn-amber btn-lg magnetic-btn">
+              <span>Ir para a Bilheteria Digital</span>
+              <span class="btn-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 4: BILHETERIA DIGITAL & CHECKOUT INTEGRADO -->
+    <section class="section-tickets" id="bilheteria">
+      <div class="container">
+        <div class="section-head section-head-light">
+          <div>
+            <span class="eyebrow eyebrow-emerald">BILHETERIA DIGITAL &amp; RESERVA ANTECIPADA</span>
+            <h2 class="reveal-words">Garanta sua entrada antes de perder sinal na serra</h2>
+          </div>
+          <p class="section-lead">
+            Simule o valor exato da sua visita, pague por Pix ou cartão (ou faça pré-reserva para pagar na guarita) e guarde seu comprovante salvo offline no navegador.
+          </p>
+        </div>
+
+        <!-- Banner automático se já existir voucher salvo -->
+        <div class="saved-voucher-banner hidden" id="saved-voucher-banner">
+          <div>
+            <span class="banner-badge">VOUCHER OFFLINE ATIVO</span>
+            <p id="saved-voucher-summary">Você já tem um comprovante salvo offline neste dispositivo.</p>
+          </div>
+          <button type="button" class="btn btn-amber magnetic-btn" id="open-saved-voucher-btn">
+            <span>Abrir Meu Voucher</span>
+          </button>
+        </div>
+
+        <div class="checkout-shell">
+          <!-- Coluna Esquerda: Data, Ingressos e Visitante -->
+          <div class="checkout-panel">
+            <div class="panel-block">
+              <div class="block-title-row">
+                <h3>1. Escolha a data da visita</h3>
+                <span class="formatted-date" id="formatted-date-label">Carregando data...</span>
+              </div>
+
+              <div class="date-controls">
+                <label class="date-input-wrap" for="visit-date">
+                  <span>Data no calendário</span>
+                  <input type="date" id="visit-date" name="visit-date" required>
+                </label>
+                <div class="quick-dates" role="group" aria-label="Atalhos de data">
+                  <button type="button" class="chip-btn" data-quick-date="today">Hoje</button>
+                  <button type="button" class="chip-btn is-selected" data-quick-date="tomorrow">Amanhã</button>
+                  <button type="button" class="chip-btn" data-quick-date="saturday">Próx. Sábado</button>
+                  <button type="button" class="chip-btn" data-quick-date="sunday">Próx. Domingo</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-block">
+              <div class="block-title-row">
+                <h3>2. Ingressos e extras do complexo</h3>
+                <span class="policy-note">Crianças até 5 anos são isentas</span>
+              </div>
+
+              <div class="ticket-rows">
+                <div class="ticket-row" data-item="adult">
+                  <div class="ticket-info">
+                    <strong>Ingresso Adulto</strong>
+                    <small>Acesso à Cascata do Chuvisqueiro + Cascata Três Quedas</small>
+                  </div>
+                  <div class="ticket-price">R$ 17,00<span>/pessoa</span></div>
+                  <div class="stepper" aria-label="Quantidade de ingressos adulto">
+                    <button type="button" class="step-btn" data-action="dec" data-target="adult" aria-label="Remover 1 ingresso adulto">−</button>
+                    <output id="qty-adult" aria-live="polite">2</output>
+                    <button type="button" class="step-btn" data-action="inc" data-target="adult" aria-label="Adicionar 1 ingresso adulto">+</button>
+                  </div>
+                </div>
+
+                <div class="ticket-row" data-item="child">
+                  <div class="ticket-info">
+                    <strong>Ingresso Infantil (6 a 10 anos)</strong>
+                    <small>Acompanhado de responsável · menores de 6 anos não pagam</small>
+                  </div>
+                  <div class="ticket-price">R$ 10,00<span>/criança</span></div>
+                  <div class="stepper" aria-label="Quantidade de ingressos infantil">
+                    <button type="button" class="step-btn" data-action="dec" data-target="child" aria-label="Remover 1 ingresso infantil">−</button>
+                    <output id="qty-child" aria-live="polite">0</output>
+                    <button type="button" class="step-btn" data-action="inc" data-target="child" aria-label="Adicionar 1 ingresso infantil">+</button>
+                  </div>
+                </div>
+
+                <div class="ticket-row" data-item="parking">
+                  <div class="ticket-info">
+                    <strong>Estacionamento (opcional)</strong>
+                    <small>Vaga interna próximo às churrasqueiras e à trilha plana</small>
+                  </div>
+                  <div class="ticket-price">R$ 20,00<span>/veículo</span></div>
+                  <div class="stepper" aria-label="Quantidade de vagas de estacionamento">
+                    <button type="button" class="step-btn" data-action="dec" data-target="parking" aria-label="Remover 1 estacionamento">−</button>
+                    <output id="qty-parking" aria-live="polite">1</output>
+                    <button type="button" class="step-btn" data-action="inc" data-target="parking" aria-label="Adicionar 1 estacionamento">+</button>
+                  </div>
+                </div>
+
+                <div class="ticket-row" data-item="camping">
+                  <div class="ticket-info">
+                    <strong>Pernoite Camping (opcional)</strong>
+                    <small>Área arborizada com banheiros, chuveiros e churrasqueiras</small>
+                  </div>
+                  <div class="ticket-price">R$ 65,00<span>/pessoa/noite</span></div>
+                  <div class="stepper" aria-label="Quantidade de pernoites de camping">
+                    <button type="button" class="step-btn" data-action="dec" data-target="camping" aria-label="Remover 1 pernoite camping">−</button>
+                    <output id="qty-camping" aria-live="polite">0</output>
+                    <button type="button" class="step-btn" data-action="inc" data-target="camping" aria-label="Adicionar 1 pernoite camping">+</button>
+                  </div>
+                </div>
+              </div>
+              <p class="form-error hidden" id="tickets-error">Selecione ao menos 1 ingresso ou pernoite para gerar seu voucher.</p>
+            </div>
+
+            <div class="panel-block">
+              <div class="block-title-row">
+                <h3>3. Dados do titular da reserva</h3>
+                <span class="policy-note">Exibido na portaria</span>
+              </div>
+              <div class="visitor-grid">
+                <div class="field-group">
+                  <label for="visitor-name">Nome completo *</label>
+                  <input type="text" id="visitor-name" placeholder="Ex.: Mariana Souza" autocomplete="name">
+                </div>
+                <div class="field-group">
+                  <label for="visitor-phone">WhatsApp *</label>
+                  <input type="tel" id="visitor-phone" placeholder="(51) 99999-9999" inputmode="tel" maxlength="15" autocomplete="tel">
+                </div>
+                <div class="field-group field-full">
+                  <label for="visitor-email">E-mail (opcional — para cópia de segurança)</label>
+                  <input type="email" id="visitor-email" placeholder="voce@email.com" autocomplete="email">
+                </div>
+              </div>
+              <p class="form-error hidden" id="visitor-error"></p>
+            </div>
+          </div>
+
+          <!-- Coluna Direita: Resumo em Tempo Real & Pagamento -->
+          <aside class="checkout-payment" aria-label="Resumo e métodos de pagamento">
+            <div class="summary-card">
+              <div class="summary-header">
+                <span>Resumo da Visita</span>
+                <strong id="summary-date-short">—</strong>
+              </div>
+              <ul class="summary-lines" id="summary-lines"></ul>
+              <div class="summary-total-row">
+                <span>Total estimado</span>
+                <strong id="summary-total">R$ 54,00</strong>
+              </div>
+            </div>
+
+            <div class="payment-box">
+              <div class="payment-tabs" role="tablist" aria-label="Método de pagamento">
+                <button type="button" role="tab" class="pay-tab is-active" id="tab-pix" aria-selected="true" aria-controls="panel-pix" data-pay-method="pix">
+                  <span>Pix Instantâneo</span>
+                  <small class="rec-badge">Recomendado</small>
+                </button>
+                <button type="button" role="tab" class="pay-tab" id="tab-card" aria-selected="false" aria-controls="panel-card" data-pay-method="card">
+                  <span>Cartão</span>
+                  <small>Até 3x</small>
+                </button>
+                <button type="button" role="tab" class="pay-tab" id="tab-gate" aria-selected="false" aria-controls="panel-gate" data-pay-method="gate">
+                  <span>Na Guarita</span>
+                  <small>Pré-reserva</small>
+                </button>
+              </div>
+
+              <!-- Painel PIX -->
+              <div class="pay-panel is-active" id="panel-pix" role="tabpanel" aria-labelledby="tab-pix">
+                <div class="pix-intro">
+                  <p>Aprovação imediata com geração automática de <strong>Voucher Offline</strong> salvo no seu navegador — ideal para chegar tranquilo mesmo sem sinal 4G na mata.</p>
+                </div>
+
+                <div class="pix-stage" id="pix-stage">
+                  <button type="button" class="btn btn-amber btn-block magnetic-btn" id="generate-pix-btn">
+                    <span>Gerar QR Code Pix · <span class="btn-total-mirror">R$ 54,00</span></span>
+                  </button>
+                </div>
+
+                <div class="pix-generated hidden" id="pix-generated">
+                  <div class="pix-qr-wrap">
+                    <canvas id="pix-qr-canvas" width="180" height="180" aria-label="QR Code Pix para pagamento"></canvas>
+                    <div class="pix-timer">Expira em <strong id="pix-countdown">14:59</strong></div>
+                  </div>
+                  <label class="pix-copy-label" for="pix-code-input">Pix Copia e Cola</label>
+                  <div class="pix-copy-row">
+                    <input type="text" id="pix-code-input" readonly aria-label="Código Pix Copia e Cola">
+                    <button type="button" class="btn btn-emerald-sm" id="copy-pix-btn">Copiar</button>
+                  </div>
+                  <p class="copy-feedback" id="copy-feedback" aria-live="polite"></p>
+                  <button type="button" class="btn btn-amber btn-block" id="confirm-pix-btn">
+                    Já paguei · Emitir Voucher Offline
+                  </button>
+                  <button type="button" class="btn-link-subtle" id="reset-pix-btn">Recalcular código Pix</button>
+                </div>
+              </div>
+
+              <!-- Painel CARTÃO (com cartão 3D dinâmico que vira ao digitar o CVV) -->
+              <div class="pay-panel hidden" id="panel-card" role="tabpanel" aria-labelledby="tab-card">
+                <div class="virtual-card-scene" aria-hidden="true">
+                  <div class="virtual-card-inner" id="virtual-card-inner">
+                    <div class="virtual-card-face virtual-card-front">
+                      <div class="vc-top">
+                        <span class="vc-chip"></span>
+                        <span class="vc-mode" id="vc-mode-label">CRÉDITO</span>
+                        <span class="vc-brand" id="vc-brand-label">CARTÃO</span>
+                      </div>
+                      <div class="vc-number" id="vc-number-preview">•••• •••• •••• ••••</div>
+                      <div class="vc-bottom">
+                        <div>
+                          <small>TITULAR</small>
+                          <strong id="vc-holder-preview">SEU NOME AQUI</strong>
+                        </div>
+                        <div>
+                          <small>VALIDADE</small>
+                          <strong id="vc-expiry-preview">MM/AA</strong>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="virtual-card-face virtual-card-back">
+                      <div class="vc-stripe"></div>
+                      <div class="vc-cvv-strip">
+                        <small>CÓDIGO DE SEGURANÇA (CVV)</small>
+                        <div class="vc-cvv-box" id="vc-cvv-preview">•••</div>
+                      </div>
+                      <div class="vc-back-note">Bilheteria Cascata do Chuvisqueiro</div>
+                    </div>
+                  </div>
+                </div>
+
+                <form id="card-form" novalidate>
+                  <div class="card-mode-toggle" role="group" aria-label="Modalidade do cartão">
+                    <button type="button" class="mode-pill is-active" data-card-mode="credit">Crédito (até 3x)</button>
+                    <button type="button" class="mode-pill" data-card-mode="debit">Débito à vista</button>
+                  </div>
+
+                  <div class="field-group">
+                    <div class="label-with-brand">
+                      <label for="card-number">Número do cartão</label>
+                      <span class="card-brand-pill" id="card-brand-pill">Cartão</span>
+                    </div>
+                    <input type="text" id="card-number" placeholder="0000 0000 0000 0000" inputmode="numeric" maxlength="19" autocomplete="cc-number">
+                  </div>
+
+                  <div class="field-group">
+                    <label for="card-holder">Nome impresso no cartão</label>
+                    <input type="text" id="card-holder" placeholder="MARIANA SOUZA" autocomplete="cc-name">
+                  </div>
+
+                  <div class="card-split">
+                    <div class="field-group">
+                      <label for="card-expiry">Validade (MM/AA)</label>
+                      <input type="text" id="card-expiry" placeholder="08/29" inputmode="numeric" maxlength="5" autocomplete="cc-exp">
+                    </div>
+                    <div class="field-group">
+                      <label for="card-cvv">CVV</label>
+                      <input type="text" id="card-cvv" placeholder="123" inputmode="numeric" maxlength="4" autocomplete="cc-csc">
+                    </div>
+                  </div>
+
+                  <div class="field-group" id="installments-group">
+                    <label for="card-installments">Parcelamento</label>
+                    <select id="card-installments"></select>
+                  </div>
+
+                  <p class="form-error hidden" id="card-error"></p>
+
+                  <button type="submit" class="btn btn-amber btn-block" id="card-submit-btn">
+                    Confirmar Pagamento · <span class="btn-total-mirror">R$ 54,00</span>
+                  </button>
+                  <p class="offline-hint">Após confirmar, seu voucher com QR Code fica gravado no aparelho.</p>
+                </form>
+              </div>
+
+              <!-- Painel NA GUARITA -->
+              <div class="pay-panel hidden" id="panel-gate" role="tabpanel" aria-labelledby="tab-gate">
+                <div class="gate-warning-box">
+                  <strong>Aviso importante para pagamento presencial:</strong>
+                  <p>
+                    Como o sinal de celular e internet na mata é instável, recomendamos levar <strong>dinheiro em espécie</strong> ou cartão físico caso opte por acertar sua entrada diretamente na guarita de acesso.
+                  </p>
+                </div>
+                <ul class="gate-checklist">
+                  <li>Pré-reserva sem cobrança online imediata</li>
+                  <li>Voucher de identificação salvo offline no navegador</li>
+                  <li>Horário de chegada recomendado: entre 07h e 16h</li>
+                </ul>
+                <button type="button" class="btn btn-amber btn-block" id="confirm-gate-btn">
+                  Confirmar Pré-Reserva · <span class="btn-total-mirror">R$ 54,00</span>
+                </button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SEÇÃO 5: FOOTER MONUMENTAL & CONTATO -->
+  <footer class="site-footer" id="contato">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-checklist-card">
+          <span class="eyebrow eyebrow-emerald">CHECKLIST RÁPIDO DO VISITANTE</span>
+          <h3>O que levar na mochila</h3>
+          <p class="checklist-sub">Marque os itens para não esquecer antes de sair de casa:</p>
+          <ul class="checklist" id="visitor-checklist">
+            <li>
+              <label><input type="checkbox" data-check-id="calcado"> <span>Calçado fechado e antiderrapante (pedras molhadas escorregam)</span></label>
+            </li>
+            <li>
+              <label><input type="checkbox" data-check-id="dinheiro"> <span>Voucher offline salvo e/ou dinheiro em espécie (sinal fraco na mata)</span></label>
+            </li>
+            <li>
+              <label><input type="checkbox" data-check-id="banho"> <span>Roupa de banho, toalha leve e muda seca para a volta</span></label>
+            </li>
+            <li>
+              <label><input type="checkbox" data-check-id="protecao"> <span>Protetor solar, repelente e água para a trilha da Três Quedas</span></label>
+            </li>
+            <li>
+              <label><input type="checkbox" data-check-id="lixo"> <span>Sacolinha para recolher todo o seu lixo (preservação da mata)</span></label>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-contact-col">
+          <div class="contact-card">
+            <span class="eyebrow eyebrow-emerald">ATENDIMENTO &amp; GRUPOS</span>
+            <h3>Fale com a administração</h3>
+            <p>
+              Dúvidas sobre condições da estrada após chuvas, excursões ou disponibilidade de camping? Fale direto no WhatsApp oficial do complexo.
+            </p>
+            <div class="contact-ctas">
+              <a
+                href="https://wa.me/5551998028474?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20para%20visitar%20a%20Cascata%20do%20Chuvisqueiro."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-amber magnetic-btn"
+              >
+                <span>WhatsApp (51) 99802-8474 ↗</span>
+              </a>
+              <a
+                href="https://share.google/BQE4f8G66X46oMTqJ"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-glass magnetic-btn"
+              >
+                <span>Ver no Google Maps ↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-meta-grid">
+            <div>
+              <small>HORÁRIO DIÁRIO</small>
+              <strong>07h às 18h</strong>
+              <span>Todos os dias do ano</span>
+            </div>
+            <div>
+              <small>LOCALIZAÇÃO</small>
+              <strong>Localidade de Chuvisqueiro</strong>
+              <span>Riozinho, RS · -29.5821, -50.4264</span>
+            </div>
+            <div>
+              <small>CRÉDITOS FOTOGRÁFICOS</small>
+              <strong>Wikimedia Commons</strong>
+              <span>CC BY-SA 4.0 · L. Toledo, C. Garcia1, E. Schilling</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-monumental" aria-hidden="true">
+        <span id="footer-wordmark">CHUVISQUEIRO</span>
+      </div>
+
+      <div class="footer-bottom">
+        <span>Cascata do Chuvisqueiro · Vale do Paranhana, Riozinho — Rio Grande do Sul</span>
+        <a href="#hero">Voltar ao topo ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL VOUCHER OFFLINE -->
+  <div class="modal-backdrop hidden" id="voucher-modal" role="dialog" aria-modal="true" aria-labelledby="voucher-title">
+    <div class="voucher-card" id="voucher-printable">
+      <button type="button" class="modal-close" id="close-voucher-btn" aria-label="Fechar comprovante">✕</button>
+
+      <div class="voucher-top">
+        <div>
+          <span class="voucher-eyebrow">CASCATA DO CHUVISQUEIRO · RIOZINHO, RS</span>
+          <h2 id="voucher-title">Voucher de Entrada</h2>
+        </div>
+        <span class="voucher-status" id="voucher-status-pill">PAGO VIA PIX</span>
+      </div>
+
+      <div class="voucher-main">
+        <div class="voucher-details">
+          <div class="voucher-meta-pair">
+            <small>CÓDIGO DA RESERVA</small>
+            <strong id="voucher-code">CHV-000000</strong>
+          </div>
+          <div class="voucher-meta-pair">
+            <small>TITULAR</small>
+            <strong id="voucher-visitor">—</strong>
+          </div>
+          <div class="voucher-meta-pair">
+            <small>DATA DA VISITA</small>
+            <strong id="voucher-date">—</strong>
+          </div>
+          <div class="voucher-meta-pair">
+            <small>MÉTODO</small>
+            <strong id="voucher-method">—</strong>
+          </div>
+
+          <ul class="voucher-items" id="voucher-items"></ul>
+
+          <div class="voucher-total">
+            <span id="voucher-total-label">Valor pago</span>
+            <strong id="voucher-total-value">R$ 0,00</strong>
+          </div>
+        </div>
+
+        <div class="voucher-qr-panel">
+          <canvas id="voucher-qr-canvas" width="196" height="196" aria-label="QR Code do voucher para validação na portaria"></canvas>
+          <span class="qr-caption">Apresente na portaria (funciona offline)</span>
+        </div>
+      </div>
+
+      <div class="voucher-offline-bar">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span>Comprovante salvo localmente neste navegador para acesso sem internet na mata.</span>
+      </div>
+
+      <div class="voucher-actions no-print">
+        <button type="button" class="btn btn-amber" id="download-voucher-btn">Baixar Voucher (PNG)</button>
+        <button type="button" class="btn btn-outline-dark" id="print-voucher-btn">Imprimir / Salvar PDF</button>
+        <a href="https://wa.me/5551998028474" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark" id="share-whatsapp-btn">
+          Enviar p/ WhatsApp ↗
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL LIGHTBOX GALERIA -->
+  <div class="modal-backdrop hidden" id="lightbox-modal" role="dialog" aria-modal="true" aria-label="Visualização ampliada da fotografia">
+    <div class="lightbox-frame">
+      <button type="button" class="modal-close" id="close-lightbox-btn" aria-label="Fechar foto">✕</button>
+      <img id="lightbox-img" src="/assets/chuvisqueiro-real-wide.jpg" alt="">
+      <p id="lightbox-caption"></p>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
